@@ -1,5 +1,7 @@
+// Nama package dari ui yang dibuat dalam aplikasi
 package com.ikanurfitriani.unscramble.ui.theme
 
+// Import library yang dibutuhkan
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -83,8 +85,8 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun UnscrambleTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    // Dynamic color in this app is turned off for learning purposes
+    // Warna dinamis tersedia di Android 12+
+    // Warna dinamis di aplikasi ini dimatikan untuk tujuan pembelajaran
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {

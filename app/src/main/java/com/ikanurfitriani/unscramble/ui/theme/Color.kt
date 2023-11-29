@@ -1,7 +1,10 @@
+// Nama package dari ui yang dibuat dalam aplikasi
 package com.ikanurfitriani.unscramble.ui.theme
 
+// Import library yang dibutuhkan
 import androidx.compose.ui.graphics.Color
 
+// Warna untuk tema terang
 val md_theme_light_primary = Color(0xFF4355B9)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFDEE0FF)
@@ -32,6 +35,7 @@ val md_theme_light_surfaceTint = Color(0xFF4355B9)
 val md_theme_light_outlineVariant = Color(0xFFC7C5D0)
 val md_theme_light_scrim = Color(0xFF000000)
 
+// Warna untuk tema gelap
 val md_theme_dark_primary = Color(0xFFBAC3FF)
 val md_theme_dark_onPrimary = Color(0xFF08218A)
 val md_theme_dark_primaryContainer = Color(0xFF293CA0)

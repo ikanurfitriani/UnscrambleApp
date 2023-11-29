@@ -1,9 +1,12 @@
+// Nama package dari data yang dibuat dalam aplikasi
 package com.ikanurfitriani.unscramble.data
 
+// Untuk menyimpan jumlah maksimum kata dalam suatu konteks
 const val MAX_NO_OF_WORDS = 10
+// Untuk menentukan nilai skor jika benar
 const val SCORE_INCREASE = 20
 
-// Set with all the words for the Game
+// Mengatur semua kata untuk game
 val allWords: Set<String> =
     setOf(
         "animal",

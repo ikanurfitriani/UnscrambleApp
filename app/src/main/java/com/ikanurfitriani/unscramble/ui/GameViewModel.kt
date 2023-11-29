@@ -1,5 +1,7 @@
+// Nama package dari ui yang dibuat dalam aplikasi
 package com.ikanurfitriani.unscramble.ui
 
+// Import library, kelas atau file yang dibutuhkan
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,7 +23,7 @@ class GameViewModel : ViewModel() {
     var userGuess by mutableStateOf("")
         private set
 
-    // Set of words used in the game
+    // Kumpulan kata-kata yang digunakan dalam game
     private var usedWords: MutableSet<String> = mutableSetOf()
     private lateinit var currentWord: String
 
@@ -29,57 +31,47 @@ class GameViewModel : ViewModel() {
         resetGame()
     }
 
-    /*
-     * Re-initializes the game data to restart the game.
-     */
+    // Inisialisasi ulang data game untuk memulai ulang game.
     fun resetGame() {
         usedWords.clear()
         _uiState.value = GameUiState(currentScrambledWord = pickRandomWordAndShuffle())
     }
 
-    /*
-     * Update the user's guess
-     */
+    // Perbarui tebakan pengguna
     fun updateUserGuess(guessedWord: String){
         userGuess = guessedWord
     }
 
-    /*
-     * Checks if the user's guess is correct.
-     * Increases the score accordingly.
-     */
+    // Memeriksa apakah tebakan pengguna benar.
+    // Meningkatkan skor yang sesuai.
     fun checkUserGuess() {
         if (userGuess.equals(currentWord, ignoreCase = true)) {
-            // User's guess is correct, increase the score
-            // and call updateGameState() to prepare the game for next round
+            // Tebakan pengguna benar, tambah skornya
+            // dan panggil updateGameState() untuk mempersiapkan game untuk putaran berikutnya
             val updatedScore = _uiState.value.score.plus(SCORE_INCREASE)
             updateGameState(updatedScore)
         } else {
-            // User's guess is wrong, show an error
+            // Tebakan pengguna salah, tampilkan kesalahan
             _uiState.update { currentState ->
                 currentState.copy(isGuessedWordWrong = true)
             }
         }
-        // Reset user guess
+        // Setel ulang tebakan pengguna
         updateUserGuess("")
     }
 
-    /*
-     * Skip to next word
-     */
+    // Lewati ke kata berikutnya
     fun skipWord() {
         updateGameState(_uiState.value.score)
-        // Reset user guess
+        // Setel ulang tebakan pengguna
         updateUserGuess("")
     }
 
-    /*
-     * Picks a new currentWord and currentScrambledWord and updates UiState according to
-     * current game state.
-     */
+    // Memilih CurrentWord dan CurrentScrambledWord baru dan memperbarui UiState sesuai dengan
+    // keadaan permainan saat ini.
     private fun updateGameState(updatedScore: Int) {
         if (usedWords.size == MAX_NO_OF_WORDS){
-            //Last round in the game, update isGameOver to true, don't pick a new word
+            // Babak terakhir dalam game, pembaruan GameOver menjadi benar, jangan pilih kata baru
             _uiState.update { currentState ->
                 currentState.copy(
                     isGuessedWordWrong = false,
@@ -88,7 +80,7 @@ class GameViewModel : ViewModel() {
                 )
             }
         } else{
-            // Normal round in the game
+            // Putaran normal dalam permainan
             _uiState.update { currentState ->
                 currentState.copy(
                     isGuessedWordWrong = false,
@@ -102,7 +94,7 @@ class GameViewModel : ViewModel() {
 
     private fun shuffleCurrentWord(word: String): String {
         val tempWord = word.toCharArray()
-        // Scramble the word
+        // Mengacak kata
         tempWord.shuffle()
         while (String(tempWord) == word) {
             tempWord.shuffle()
@@ -111,7 +103,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun pickRandomWordAndShuffle(): String {
-        // Continue picking up a new random word until you get one that hasn't been used before
+        // Lanjutkan mengambil kata acak baru hingga Anda mendapatkan kata yang belum pernah digunakan sebelumnya
         currentWord = allWords.random()
         return if (usedWords.contains(currentWord)) {
             pickRandomWordAndShuffle()
